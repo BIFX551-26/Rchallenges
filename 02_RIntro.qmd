@@ -1,0 +1,104 @@
+---
+title: Intro to R - Exercises
+date: February 2, 2026
+---
+
+## Challenge: Set up your project
+
+We will be much more productive if we set up a project folder for our work. Follow these steps to create a new R project:
+
+* Clone the [repository with these challenges](https://github.com/BIFX551-26/Rchallenges) from GitHub to your local computer
+* Open Positron
+* Open the project by going to `File -> Open Folder...` and select the folder for the repository you just cloned
+
+## Challenge: Loading Data with Headers
+
+What happens if you forget to put `header = FALSE`? The default value is `header = TRUE`, which you can check with `?read.csv` or `help(read.csv)`. What do you expect will happen if you leave the default value of `header`?
+
+Before you run any code, think about what will happen to the first few rows of your data frame, and its overall size. Then run the following code and see if your expectations agree:
+
+```{r}
+#| eval: false
+read.csv(file = "data/inflammation-01.csv")
+```
+
+Since we didn’t tell it to do anything else with the function’s output, the console will display the full contents of the file `inflammation-01.csv`.
+
+we can’t use the data unless we assign it to a variable. We can think of a variable as a container with a name, such as `x`, `current_temperature`, or `subject_id` that contains one or more values. We can create a new variable and assign a value to it using `<-`.
+
+```{r}
+dat <- read.csv(file = "data/inflammation-01.csv", header = FALSE)
+```
+
+This statement doesn’t produce any output because the assignment doesn’t display anything. If we want to check if our data has been loaded, we can print the variable’s value by typing the name of the variable dat. For large datasets, it’s often better to just look at the first few rows or the structure of the data frame.
+
+```{r}
+# look at the first few rows
+head(dat)
+
+# look at the structure of the data frame
+str(dat)
+```
+
+## Challenge: Assigning Values to Variables
+
+Draw diagrams showing what variables refer to what values after each statement in the following program (i.e. on a separate piece of paper, nothing needs to be added here):
+
+```{r}
+#| eval: false
+mass <- 47.5
+age <- 122
+mass <- mass * 2.0
+age <- age - 20
+```
+
+## Challenge: Subsetting Data
+
+We can take subsets of character vectors as well:
+
+```{r}
+#| eval: false
+animal <- c("m", "o", "n", "k", "e", "y")
+# first three characters
+animal[1:3]
+# last three characters
+animal[4:6]
+```
+
+1. If the first four characters are selected using the subset `animal[1:4]`, how can we obtain the first four characters in reverse order?
+
+2. What is `animal[-1]`? What is `animal[-4]`? Given those answers, explain what `animal[-1:-4]` does.
+
+3. Use a subset of `animal` to create a new character vector that spells the word "eon", i.e. `c("e", "o", "n")`.
+
+```{r}
+#| eval: false
+# Your code here
+```
+
+## Challenge: Subsetting More Data
+
+Suppose you want to determine the maximum inflammation for patient 5 across days three to seven. To do this you would extract the relevant subset from the data frame and calculate the maximum value. Which of the following lines of R code gives the correct answer?
+
+1. `max(dat[5, ])`
+2. `max(dat[3:7, 5])`
+3. `max(dat[5, 3:7])`
+4. `max(dat[5, 3, 7])`
+
+```{r}
+#| eval: false
+# Test your answer here
+```
+
+## Challenge: Subsetting and Re-Assignment
+
+Using the inflammation data frame `dat` from above: Let's pretend there was something wrong with the instrument on the first five days for every second patient (#2, 4, 6, etc.), which resulted in the measurements being twice as large as they should be.
+
+1. Write a vector containing each affected patient (hint: `?seq`)
+2. Create a new data frame in which you halve the first five days' values in only those patients
+3. Print out the corrected data frame to check that your code has fixed the problem
+
+```{r}
+#| eval: false
+# Your code here
+```
