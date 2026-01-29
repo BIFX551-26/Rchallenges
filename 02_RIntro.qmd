@@ -1,104 +1,366 @@
 ---
 title: Intro to R - Exercises
+author: "Student Name"
 date: February 2, 2026
+format: docx
 ---
 
-## Challenge: Set up your project
+The exercises in this document follow along closely with the [Introduction to R and RStudio](https://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro.html), [Seeking Help](https://swcarpentry.github.io/r-novice-gapminder/instructor/03-seeking-help.html) and [Data Structures](https://swcarpentry.github.io/r-novice-gapminder/instructor/04-data-structures-part1.html) modules of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
 
-We will be much more productive if we set up a project folder for our work. Follow these steps to create a new R project:
+::: callout-tip
+## Key Points
 
-* Clone the [repository with these challenges](https://github.com/BIFX551-26/Rchallenges) from GitHub to your local computer
-* Open Positron
-* Open the project by going to `File -> Open Folder...` and select the folder for the repository you just cloned
+-   Intro to R
+    -   R has the usual arithmetic operators and mathematical functions.
+    -   Use `<-` to assign values to variables.
+    -   Use `ls()` to list the variables in a program.
+    -   Use `rm()` to delete objects in a script.
+    -   Use `install.packages()` to install packages and `library()` to load them.
+-   Seeking Help
+    -   Use `help()` to get online help in R.
+-   Data Structures
+    -   Use read.csv to read tabular data in R.
+    -   The basic data types in R are double, integer, complex, logical, and character.
+    -   Data structures such as data frames or matrices are built on top of lists and vectors, with some added attributes.
+:::
 
-## Challenge: Loading Data with Headers
+## Intro to R
 
-What happens if you forget to put `header = FALSE`? The default value is `header = TRUE`, which you can check with `?read.csv` or `help(read.csv)`. What do you expect will happen if you leave the default value of `header`?
+#### Challenge 1
 
-Before you run any code, think about what will happen to the first few rows of your data frame, and its overall size. Then run the following code and see if your expectations agree:
+Which of the following are valid R variable names?
 
-```{r}
-#| eval: false
-read.csv(file = "data/inflammation-01.csv")
+```         
+min_height
+max.height
+_age
+.mass
+MaxLength
+min-length
+2widths
+celsius2kelvin
 ```
 
-Since we didn’t tell it to do anything else with the function’s output, the console will display the full contents of the file `inflammation-01.csv`.
+<!-- Challenge 1 answer begin -->
 
-we can’t use the data unless we assign it to a variable. We can think of a variable as a container with a name, such as `x`, `current_temperature`, or `subject_id` that contains one or more values. We can create a new variable and assign a value to it using `<-`.
+-   Valid
+-   Invalid
 
-```{r}
-dat <- read.csv(file = "data/inflammation-01.csv", header = FALSE)
-```
+<!-- Challenge 1 answer end -->
 
-This statement doesn’t produce any output because the assignment doesn’t display anything. If we want to check if our data has been loaded, we can print the variable’s value by typing the name of the variable dat. For large datasets, it’s often better to just look at the first few rows or the structure of the data frame.
+#### Challenge 2
 
-```{r}
-# look at the first few rows
-head(dat)
-
-# look at the structure of the data frame
-str(dat)
-```
-
-## Challenge: Assigning Values to Variables
-
-Draw diagrams showing what variables refer to what values after each statement in the following program (i.e. on a separate piece of paper, nothing needs to be added here):
+What will be the value of each variable after each statement in the following lines of code?
 
 ```{r}
-#| eval: false
 mass <- 47.5
 age <- 122
-mass <- mass * 2.0
+mass <- mass * 2.3
 age <- age - 20
 ```
 
-## Challenge: Subsetting Data
+<!-- Challenge 2 answer begin -->
 
-We can take subsets of character vectors as well:
+<!-- Challenge 2 answer end -->
 
-```{r}
-#| eval: false
-animal <- c("m", "o", "n", "k", "e", "y")
-# first three characters
-animal[1:3]
-# last three characters
-animal[4:6]
-```
+#### Challenge 3
 
-1. If the first four characters are selected using the subset `animal[1:4]`, how can we obtain the first four characters in reverse order?
+Run the code from the previous challenge, and write a command to compare `mass` to `age`. Is mass larger than age?
 
-2. What is `animal[-1]`? What is `animal[-4]`? Given those answers, explain what `animal[-1:-4]` does.
-
-3. Use a subset of `animal` to create a new character vector that spells the word "eon", i.e. `c("e", "o", "n")`.
+<!-- Challenge 3 answer begin -->
 
 ```{r}
-#| eval: false
-# Your code here
+# comparison code goes here
 ```
 
-## Challenge: Subsetting More Data
+<!-- Challenge 3 answer end -->
 
-Suppose you want to determine the maximum inflammation for patient 5 across days three to seven. To do this you would extract the relevant subset from the data frame and calculate the maximum value. Which of the following lines of R code gives the correct answer?
+#### Challenge 4
 
-1. `max(dat[5, ])`
-2. `max(dat[3:7, 5])`
-3. `max(dat[5, 3:7])`
-4. `max(dat[5, 3, 7])`
+Clean up your working environment by deleting the mass and age variables.
+
+<!-- Challenge 4 answer begin -->
 
 ```{r}
-#| eval: false
-# Test your answer here
+# code goes here
 ```
 
-## Challenge: Subsetting and Re-Assignment
+<!-- Challenge 4 answer end -->
 
-Using the inflammation data frame `dat` from above: Let's pretend there was something wrong with the instrument on the first five days for every second patient (#2, 4, 6, etc.), which resulted in the measurements being twice as large as they should be.
+#### Challenge 5
 
-1. Write a vector containing each affected patient (hint: `?seq`)
-2. Create a new data frame in which you halve the first five days' values in only those patients
-3. Print out the corrected data frame to check that your code has fixed the problem
+Install the following packages: `ggplot2`, `dplyr`, `gapminder`
+
+<!-- Challenge 5 answer begin -->
 
 ```{r}
-#| eval: false
-# Your code here
+# this will fail if the required packages are not installed
+library(ggplot2)
+library(dplyr)
+library(gapminder)
 ```
+
+<!-- Challenge 5 answer end -->
+
+## Seeking Help
+
+#### Challenge 6
+
+Look at the help page for `c`. What kind of vector do you expect will be created if you evaluate the following?
+
+```{r}
+c(1, 2, 3)
+c('d', 'e', 'f')
+c(1, 2, 'f')
+```
+
+<!-- Challenge 6 answer begin -->
+
+Your answer goes here
+
+<!-- Challenge 6 answer end -->
+
+#### Challenge 7
+
+Look at the help for the `paste` function. You will need to use it later. What's the difference between the `sep` and `collapse` arguments?
+
+<!-- Challenge 7 answer begin -->
+
+Your answer goes here
+
+<!-- Challenge 7 answer end -->
+
+#### Challenge 8
+
+Use help to find a function (and its associated parameters) that you could use to load data from a tabular file in which columns are delimited with "\t\" (tab) and the decimal point is a"." (period). This check for decimal separator is important, especially if you are working with international colleagues, because different countries have different conventions for the decimal point (i.e. comma vs period).
+
+::: {.callout-note collapse="true"}
+# Hint
+
+Use `??"read table"` to look up functions related to reading in tabular data.
+:::
+
+<!-- Challenge 8 answer begin -->
+
+Your answer goes here
+
+<!-- Challenge 8 answer end -->
+
+## Data Structures
+
+#### Challenge 9
+
+An important part of every data analysis is cleaning the input data. If you know that the input data is all of the same format, (e.g. numbers), your analysis is much easier! Clean the cat data set from the chapter about type coercion.
+
+Use the starter code provided here and complete the tasks below.
+
+<!-- Challenge 9 answer begin -->
+
+```{r}
+# Read data (make sure you are in the correct working directory here!)
+cats <- data.frame(coat = c("calico", "black", "tabby", "tabby"),
+           weight = c(2.1, 5.0, 3.2, "2.3 or 2.4"),
+           likes_catnip = c(1, 0, 1, 1))
+
+# 1. Print the data
+## your command goes here ##
+
+# 2. Show an overview of the table with all data types
+## your command goes here ##
+
+# 3. The "weight" column has the incorrect data type ## your comment goes here ##.
+#    The correct data type is: ## your comment goes here ##
+
+# 4. Correct the 4th weight data point with the mean of the two given values
+cats$weight[4] <- 2.35
+
+#    print the data again to see the effect
+cats
+
+# 5. Convert the weight to the right data type
+cats$weight <- ## your command goes here ##
+
+#    Calculate the mean to test yourself
+mean(cats$weight)
+
+# If you see the correct mean value (and not NA), you did the exercise
+# correctly!
+```
+
+<!-- Challenge 9 answer end -->
+
+#### Challenge 10
+
+Make a vector with the numbers 1 through 26 (save this vector to the variable `x`). Then, multiply the vector by 2.
+
+<!-- Challenge 10 answer begin -->
+
+```{r}
+# your commands go here
+```
+
+<!-- Challenge 10 answer end -->
+
+#### Challenge 11
+
+```{r}
+named_vector <- c(a = 1, b = 2, c = 3)
+```
+
+What is the data type of the names of `named_vector`? What function(s) can we use to check this?
+
+<!-- Challenge 11 answer begin -->
+
+```{r}
+# your command goes here
+```
+
+<!-- Challenge 11 answer end -->
+
+#### Challenge 12
+
+Instead of just changing some of the names a vector/list already has, you can also set all names of an object by writing code like (replace ALL CAPS text):
+
+```         
+names( OBJECT ) <-  CHARACTER_VECTOR
+```
+
+Create a vector that gives the number for each letter in the alphabet! R has a built-in object called `LETTERS`. It is a 26-character vector, from A to Z.
+
+<!-- Challenge 12 answer begin -->
+
+```{r}
+# Generate a vector called letter_no with the sequence of numbers from 1 to 26!
+letter_no <- ## your command goes here ##
+
+# Set the names of the number sequence to the 26 letters in `LETTERS`.
+## your command goes here ##
+
+# Test yourself by calling `letter_no["B"]`, which should give you the number 2!
+letter_no["B"]
+```
+
+<!-- Challenge 12 answer end -->
+
+#### Challenge 13
+
+There are several subtly different ways to call variables, observations and elements from `data.frames`. Try out these examples and explain what is returned by each one. *Hint*: Use the function `typeof()` to examine what is returned in each case.
+
+<!-- Challenge 13 answer begin -->
+
+```{r}
+cats[1]
+```
+
+Explain output here.
+
+```{r}
+cats[[1]]
+```
+
+Explain output here.
+
+```{r}
+cats$coat
+```
+
+Explain output here.
+
+```{r}
+cats["coat"]
+```
+
+Explain output here.
+
+```{r}
+cats[1, 1]
+```
+
+Explain output here.
+
+```{r}
+cats[, 1]
+```
+
+Explain output here.
+
+```{r}
+cats[1, ]
+```
+
+<!-- Challenge 13 answer end -->
+
+#### Challenge 14
+
+Given `matrix_example`,
+
+```{r}
+matrix_example <- matrix(0, ncol=6, nrow=3)
+```
+
+what do you think will be the result of `length(matrix_example)`? Try it. Were you right? Why / why not?
+
+<!-- Challenge 14 answer begin -->
+
+Explain here.
+
+<!-- Challenge 14 answer end -->
+
+#### Challenge 15
+
+Make another matrix, this time containing the numbers 1:50, with 5 columns and 10 rows. Did the matrix function fill your matrix by column, or by row, as its default behavior? See if you can figure out how to change this. (hint: read the documentation for matrix!)
+
+<!-- Challenge 15 answer begin -->
+
+```{r}
+# using matrix with default `matrix` parameters
+## your command goes here
+
+# modify the previous command to fill in the opposite order as above
+## your command goes here
+```
+
+<!-- Challenge 15 answer end -->
+
+#### Challenge 16
+
+Create a list of length two containing a character vector for each of the sections in this part of the workshop:
+
+-   Data types
+-   Data structures
+
+Populate each character vector with the names of the data types and data structures we've seen so far.
+
+<!-- Challenge 16 answer begin -->
+
+```{r}
+## you command goes here
+```
+
+<!-- Challenge 16 answer end -->
+
+#### Challenge 17
+
+Consider the R output of the matrix below:
+
+```         
+     [,1] [,2]
+[1,]    4    1
+[2,]    9    5
+[3,]   10    7
+```
+
+What was the command that generated this output? Examine each command and try to figure out the correct one before typing them. Think about what matrices the other commands will produce.
+
+1.  `matrix(c(4, 1, 9, 5, 10, 7), nrow = 3)`
+2.  `matrix(c(4, 9, 10, 1, 5, 7), ncol = 2, byrow = TRUE)`
+3.  `matrix(c(4, 9, 10, 1, 5, 7), nrow = 2)`
+4.  `matrix(c(4, 1, 9, 5, 10, 7), ncol = 2, byrow = TRUE)`
+
+<!-- Challenge 17 answer begin -->
+
+```{r}
+# your codmmand goes here
+```
+
+<!-- Challenge 17 answer end -->
