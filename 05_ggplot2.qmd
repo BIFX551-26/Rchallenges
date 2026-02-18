@@ -1,0 +1,96 @@
+---
+title: ggplot2 - Exercises
+author: "Student Name"
+date: February 23, 2026
+format: docx
+---
+
+These exercises follow along closely with the [ggplot2](https://swcarpentry.github.io/r-novice-gapminder/08-plot-ggplot2.html) module of [R for Reproducible Research](https://swcarpentry.github.io/r-novice-gapminder/index.html), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
+
+## ggplot2
+
+### Challenge 1
+
+Modify the following code so that the figure shows how life expectancy has changed over time.
+
+```{r}
+library(ggplot2)
+library(gapminder)
+
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp)) +
+  geom_point()
+```
+
+### Challenge 2
+
+In the previous examples and challenge we've used the aes function to tell the scatterplot geom about the x and y locations of each point. Another aesthetic property we can modify is the point color. Modify the code from the previous challenge to color the points by the `continent` column.
+
+```{r}
+# your code goes here
+```
+
+What trends do you see in the data? Are they what you expected?
+
+*your answer goes here*
+
+### Challenge 3
+
+Switch the order of the point and line layers from the previous example.
+
+```{r}
+# your code goes here
+```
+
+What happened?
+
+*your answer goes here*
+
+### Challenge 4
+
+Modify the color and size of the points on the point layer in the figure below.
+
+-   Hint: do not use the aes function.
+-   Hint: the equivalent of linewidth for points is size
+
+```{r}
+ggplot(gapminder, aes(gdpPercap, lifeExp)) +
+  geom_point(alpha = 0.5) +
+  scale_x_log10() +
+  geom_smooth(method = "lm")
+```
+
+Now modify the points to be a different shape, and color them by continent as well.
+
+```{r}
+ggplot(gapminder, aes(gdpPercap, lifeExp)) +
+  geom_point(alpha = 0.5) +
+  scale_x_log10() +
+  geom_smooth(method = "lm")
+```
+
+### Challenge 5
+
+Generate boxplots to compare life expectancy between the different continents during the available years (i.e. there should be a separate panel for each year in the data set).
+
+Bonus:
+
+-   Add jittered points to the boxplot to show the distribution of the data
+-   Add violin plots to the boxplot to show the distribution of the data
+-   Rename the y-axis and remove x-axis labels
+
+```{r}
+# your code goes here
+```
+
+### Challenge 6
+
+Modify the following plot such that it is easier to read and interpret. You can modify the colors, point size, point shape, line type, line width, and/or the theme. You may also want to refer to the [ColorBrewer](https://colorbrewer2.org/) palettes to choose a color scheme that is colorblind friendly and works well in black and white.
+
+```{r}
+library(RColorBrewer)
+
+ggplot(gapminder, aes(year, lifeExp, group=country, color=continent)) +
+  geom_jitter(height = 0, alpha = 0.5) +
+  theme_minimal() +
+  scale_color_brewer(palette = "Set1")
+```
