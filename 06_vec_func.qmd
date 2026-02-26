@@ -1,0 +1,200 @@
+---
+title: Vectorization and Functions - Exercises
+author: "Student Name"
+date: March 2, 2026
+format: docx
+---
+
+These exercises follow along closely with the [Vectorization](https://swcarpentry.github.io/r-novice-gapminder/09-vectorization.html) and [Functions](https://swcarpentry.github.io/r-novice-gapminder/10-functions.html) modules of [R for Reproducible Research](https://swcarpentry.github.io/r-novice-gapminder/index.html), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
+
+
+## Vectorization
+
+### Challenge 1
+
+Practice working with vectorized data on the `pop` column of the `gapminder` dataset.
+
+Make a new column in the `gapminder` data frame that contains population in units of millions of people. Check the head or tail of the data frame to make sure it worked.
+
+```{r}
+# your code goes here
+```
+
+### Challenge 2
+
+On a single graph, plot population, in millions, against year, for all countries. Do not worry about identifying which country is which.
+
+```{r}
+# your code goes here
+```
+
+Repeat the exercise, graphing only for China, India, and Indonesia. Again, do not worry about which is which.
+
+```{r}
+# your code goes here
+```
+
+### Challenge 3
+
+Given the following matrix:
+
+```{r}
+(m <- matrix(1:12, nrow=3, ncol=4))
+```
+
+Write down what happens when you run the following expressions? Did you get the output you expected?
+
+-   `m ^ -1`
+-   `m * c(1, 0, -1)`
+-   `m > c(0, 20)`
+-   `m * c(1, 0, -1, 2)`
+
+*your answers go here*
+
+### Challenge 4
+
+We're interested in looking at the sum of the following sequence of fractions:
+
+```
+x = 1/(1^2) + 1/(2^2) + 1/(3^2) + ... + 1/(n^2)
+```
+
+This would be tedious to type out, and impossible for high values of `n`. Use vectorisation to compute `x` when `n=100`.
+
+Start by writing a `for` loop to compute this sum. Sometimes this can be helpful when trying to figure out how to vectorize a calculation.
+
+```{r}
+# for loop code goes here
+```
+
+Now, with this in mind, vectorize this `for` loop and calculate the result when `n=10,000`?
+
+```{r}
+# vectorized code goes here
+```
+
+## Functions
+
+### Challenge 5
+
+Write a function called `celsius_to_kelvin()` that takes a temperature in Kelvin and returns that temperature in Celsius.
+
+Hint: To convert from Celsius to Kelvin, we add 273.15
+
+```{r}
+#' celsius_to_kelvin
+#' Convert degrees Celsius to degrees Kelvin
+#' 
+#' @param temp Temperature in degrees Celsius
+#' 
+#' @return The temperature in degrees Kelvin
+# your code goes here
+```
+
+### Challenge 6
+
+Write and test a function called `fahr_to_kelvin` that combines `fahr_to_celsius` and `celsius_to_kelvin`.
+
+```{r}
+# From the lecture notes:
+#' fahr_to_celsius
+#' 
+#' Convert degrees Fahrenheit to Celsius
+#' 
+#' @param temp Vector of temperatures in degrees Fahrenheit
+#' 
+#' @return Vector of temperatures in degrees Celsius
+fahr_to_celsius <- function(temp) {
+  (temp - 32) * (5 / 9)
+}
+
+
+#' fahr_to_kelvin
+#' Convert degrees Fahrenheit to degrees Kelvin
+#' 
+#' @param temp A vector of temperatures in degrees Fahrenheit
+#' 
+#' @return A vector of temperatures in degrees Kelvin
+# your code goes here
+```
+
+### Challenge 7
+
+Use defensive programming to ensure that our functions throw a errors immediately if the argument `temp` is specified inappropriately. Do we *need* to check `temp` for `fahr_to_kelvin`? Why? What should we consider when deciding whether to check a particular input?
+
+```{r}
+# your code goes here
+```
+
+### Challenge 8
+
+Storing our functions in a separate file is helpful for a lot of reasons. Copy all temperature conversion functions to a separate file and load it here with `source`.
+
+```{r}
+# your code goes here
+
+# functions still work
+fahr_to_celsius(212)
+fahr_to_kelvin(32)
+```
+
+### Challenge 9
+
+Test out `calcGDP` by calculating the GDP for New Zealand in 1952 and 1987. How do these values differ?
+
+```{r}
+# your code goes here
+```
+
+### Challenge 10
+
+The `paste()` function can be used to combine text together, e.g:
+
+```{r}
+best_practice <- c("Write", "programs", "for", "people", "not", "computers")
+paste(best_practice, collapse=" ")
+```
+
+Write a function called `fence()` that takes two vectors as arguments, called `text` and `wrapper`, and prints out the text wrapped with the wrapper. So, the output of `fence("Hello!")` would be:
+
+```
+***Hello!***
+```
+
+:::{.callout-note}
+#### Note
+
+The `paste()` function has an argument called `sep`, which specifies the separator between text. The default is a space: `" "`. The default for `paste0()` is no space, `""`.
+
+:::
+
+```{r}
+#' fence
+#' Print out text wrapped inside a wrapper
+#' 
+#' @param text A character vector
+#' @param wrapper A character value (default is "***")
+#' 
+#' @return A character vector wrapped in a the wrapper text
+# your code goes here
+```
+
+### Challenge 11
+
+For our final challenge, we will revisit the p-series we introduced in Challenge 4 above. Create a new function, `p_series`, that will caclulate the sum of the following series:
+
+```
+x = 1/(1^p) + 1/(2^p) + ... + 1/(n^p)
+```
+
+```{r}
+#' p_series
+#' Calculate the sum of a p-series
+#' 
+#' @param n Integer value defining how many terms to sum up
+#' @param p Integer value defining the power term
+#' 
+#' @return The following sum is returned: 1/(1^p) + 1/(2^p) + ... + 1/(n^p)
+
+# your code goes here
+```
