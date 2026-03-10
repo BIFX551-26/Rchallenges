@@ -1,0 +1,93 @@
+---
+title: Data Frames and the Tidyverse - Exercises
+author: "Student Name"
+date: March 16, 2026
+format: docx
+---
+
+These exercises follow along closely with the [Data Frame Manipulation with dplyr](https://swcarpentry.github.io/r-novice-gapminder/12-dplyr.html) and [Data Frame Manipulation with tidyr](https://swcarpentry.github.io/r-novice-gapminder/13-tidyr.html) modules of [R for Reproducible Research](https://swcarpentry.github.io/r-novice-gapminder/index.html), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
+
+```{r}
+#| include: false
+# We typically will want to load our packages and perhaps perform some preliminary data wrangling
+# at the top of our quarto document.
+# Adding `#| include: false` will ignore any messages printed to the screen
+# when these packages are loaded, resulting in a cleaner document.
+```
+
+## `dplyr`
+
+### Challenge 1
+
+Write a single command (which can span multiple lines and includes pipes) that will produce a data frame that has the African values for `lifeExp`, `country` and `year`, but not for other continents.
+
+```{r}
+# your code goes here
+```
+
+How many rows does your data frame have and why?
+
+*your answer goes here*
+
+### Challenge 2
+
+Calculate the average life expectancy per country.
+
+```{r}
+# your answer goes here
+```
+
+Which has the longest average life expectancy and which has the shortest average life expectancy?
+
+*Your answer goes here*
+
+### Challenge 3
+
+Modify the following code to use `mutate`.
+
+```{webr-r}
+library(ggplot2)
+
+# Filter countries located in the Americas
+americas <- gapminder[gapminder$continent == "Americas", ]
+# Make the plot
+ggplot(data = americas, mapping = aes(x = year, y = lifeExp)) +
+  geom_line() +
+  facet_wrap( ~ country) +
+  theme(axis.text.x = element_text(angle = 45))
+```
+
+
+## `tidyr`
+
+### Challenge 4
+
+Is gapminder a purely long, purely wide, or some intermediate format? Why?
+
+*your answer goes here*
+
+### Challenge 5
+
+Using the longer version of gapminder, calculate the mean life expectancy, population, and gdpPercap for each continent. Hint: use the `group_by` and `summarize` functions we learned in the `dplyr` lesson. Can you do it using pipes?
+
+```{r}
+read.csv('https://swcarpentry.github.io/r-novice-gapminder/data/gapminder_wide.csv') |>
+
+  # this makes our data a little too long
+  pivot_longer(cols = c(starts_with('pop'), starts_with('lifeExp'), starts_with('gdpPercap')),
+               names_to = "obstype_year",
+               values_to = "obs_values") |>
+  
+  separate(obstype_year, into = c('obs_type', 'year'), sep = "_") |>
+  mutate(year = as.integer(year))
+
+  # your code goes here
+```
+
+### Challenge 6
+
+Take the `gap_wide` data frame 1 step further and create a `gap_ludicrously_wide` data frame by pivoting over countries, year and the 3 metrics? Hint this new data frame should only have 5 rows.
+
+```{r}
+# your code goes here
+```
